@@ -1,0 +1,139 @@
+---
+layout: default
+title: AllSky Youtube Uploader
+description: AllSky Youtube Uploader: publish to YouTube.
+---
+
+<div class="hero">
+  <h2>Youtube Uploader</h2>
+  <p>
+    AllSky Youtube Uploader: uploads captures of the sky around the clock, identifies stars
+    and aircraft, builds daily timelapse videos, and publishes them to YouTube.
+  </p>
+</div>
+
+<h2>Hardware Setup</h2>
+<p>
+  A typical AllSky Youtube Uploader station consists of a few affordable components mounted
+  outdoors with a clear view of the sky:
+</p>
+<div class="setup-diagram">
+  <div class="setup-item">
+    <div class="setup-icon">&#9641;</div>
+    <div class="setup-label">Raspberry Pi</div>
+    <div class="setup-desc">Pi 4 or Pi 5 recommended. Runs the capture daemon, image processing, and web server.</div>
+  </div>
+  <div class="setup-connector">&darr;</div>
+  <div class="setup-item">
+    <div class="setup-icon">&#9678;</div>
+    <div class="setup-label">Fisheye Camera</div>
+    <div class="setup-desc">ZWO ASI (e.g., ASI178MC), Raspberry Pi HQ with fisheye lens, or Arducam. Covers the full 180&deg; hemisphere.</div>
+  </div>
+  <div class="setup-connector">&darr;</div>
+  <div class="setup-item">
+    <div class="setup-icon">&#9651;</div>
+    <div class="setup-label">Weatherproof Enclosure</div>
+    <div class="setup-desc">Acrylic dome housing mounted on a pole or rooftop. Protects electronics from rain, dew, and temperature extremes.</div>
+  </div>
+  <div class="setup-connector">&darr;</div>
+  <div class="setup-item">
+    <div class="setup-icon">&#9783;</div>
+    <div class="setup-label">ADS-B Receiver (Optional)</div>
+    <div class="setup-desc">RTL-SDR dongle + antenna receives aircraft transponder signals for flight identification in sky images.</div>
+  </div>
+</div>
+
+<h2>Timelapse Pipeline</h2>
+<p>
+  AllSky Youtube Uploader runs an automated pipeline that transforms raw sky frames into
+  polished timelapse videos and publishes them to YouTube without manual intervention.
+</p>
+<ol class="pipeline">
+  <li>
+    <strong>Capture</strong> — The camera daemon takes an exposure every few seconds.
+    Daytime uses short exposures (~1&thinsp;ms); nighttime ramps up to multi-second exposures
+    for maximum star visibility. Gain, white balance, and gamma adjust automatically based
+    on ambient light.
+  </li>
+  <li>
+    <strong>Overlay</strong> — Each frame is annotated with a timestamp, constellation lines,
+    identified objects, and camera metadata. Overlays are configurable through the AllSky web UI.
+  </li>
+  <li>
+    <strong>Keogram &amp; Startrails</strong> — At the end of each night, a keogram (a single
+    strip showing the sky's evolution over time) and a startrail composite are generated from
+    the night's frames.
+  </li>
+  <li>
+    <strong>Timelapse Encoding</strong> — ffmpeg assembles the day's annotated frames into an
+    MP4 video. Typical output is 1&ndash;3 minutes at 25&thinsp;fps, covering the full 24-hour cycle.
+  </li>
+  <li>
+    <strong>YouTube Upload</strong> — The finished timelapse is uploaded to your YouTube channel
+    via the <strong>YouTube Data API v3</strong>. The video title, description, and privacy setting
+    are automatically populated with the date, location, and capture statistics.
+  </li>
+</ol>
+
+<h2>Star &amp; Object Detection</h2>
+<p>
+  Beyond simple imaging, AllSky Youtube Uploader can identify what's in the sky using two
+  complementary approaches:
+</p>
+
+<h3>Astrometric Plate Solving</h3>
+<p>
+  Each nighttime frame can be plate-solved — the process of matching the pattern of
+  detected point sources against a star catalog to determine the precise sky coordinates
+  of every pixel. This enables:
+</p>
+<ul>
+  <li>Constellation overlay with star names and magnitudes</li>
+  <li>Planet identification (visible planets labeled in real time)</li>
+  <li>Meteor detection by identifying fast-moving streaks that don't match known objects</li>
+  <li>Cloud coverage estimation based on the ratio of expected vs. detected stars</li>
+</ul>
+
+<h3>Aircraft &amp; Satellite Identification</h3>
+<p>
+  When paired with an ADS-B receiver (an RTL-SDR dongle tuned to 1090&thinsp;MHz), AllSky Youtube Uploader
+  correlates aircraft transponder data with streaks visible in long-exposure frames:
+</p>
+<ul>
+  <li><strong>ADS-B aircraft</strong> — Flight number, altitude, speed, and aircraft type are matched to visible trails using position and timing</li>
+  <li><strong>Satellites</strong> — TLE (Two-Line Element) orbital data from CelesTrak predicts satellite passes; bright streaks at the predicted positions are labeled with satellite names (ISS, Starlink, etc.)</li>
+  <li><strong>Unknown objects</strong> — Streaks that match neither known aircraft nor predicted satellite passes are flagged for review</li>
+</ul>
+
+<h2>YouTube Integration</h2>
+<p>
+  AllSky Youtube Uploader uses the <strong>YouTube Data API v3</strong> to upload daily timelapse videos
+  to your YouTube channel. This is the primary Google API integration and requires you to
+  authorize the application with your Google account.
+</p>
+<p>The integration uses the following OAuth scope:</p>
+<ul>
+  <li><code>youtube.upload</code> — Permission to upload videos to your YouTube channel</li>
+</ul>
+<p>
+  The application does not read, modify, or delete any existing content on your channel.
+  It only uploads new videos that your AllSky Youtube Uploader has generated. You can revoke access at
+  any time through your
+  <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions</a>.
+</p>
+
+<h2>Open Source</h2>
+<p>
+  AllSky Youtube Uploader is free and open-source software, maintained by the AllSky community.
+  The source code is available on
+  <a href="{{ site.github_repo }}" target="_blank" rel="noopener">GitHub</a>.
+  Contributions, bug reports, and feature requests are welcome.
+</p>
+
+<h2>Getting Started</h2>
+<p>
+  To set up your own AllSky Youtube Uploader, you need a Raspberry Pi (Pi 4 or newer recommended),
+  a compatible camera with a fisheye lens, and a weatherproof enclosure. Follow the
+  <a href="{{ site.github_repo }}/wiki" target="_blank" rel="noopener">installation guide</a>
+  for detailed instructions on hardware assembly, software installation, and YouTube API configuration.
+</p>

@@ -1,0 +1,10 @@
+title: AllSky Youtube Uploader
+description: AllSky Youtube Uploader -- Open-source publish to YouTube.
+url: "ajmendez.github.io/allsky" # set to your GitHub Pages URL, e.g., https://username.github.io
+baseurl: "/allsky" # set if hosted in a subdirectory, e.g., /allsky-site
+copyright_year: 2026
+github_repo: https://github.com/ajmendez/allsky
+
+exclude:
+  - README.md
+  - LICENSE

@@ -1,0 +1,323 @@
+/* allsky-site — minimal GitHub Pages theme for Google API branding */
+
+:root {
+  --bg: #0b0e17;
+  --surface: #131829;
+  --border: #1e2640;
+  --text: #c9d1e3;
+  --text-muted: #7b8aab;
+  --accent: #5b8def;
+  --accent-dim: #3a5a9e;
+  --white: #e8ecf4;
+  --star: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 17px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- stars background ---- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(1px 1px at 10% 20%, var(--star) 0.5px, transparent 1px),
+    radial-gradient(1px 1px at 30% 65%, var(--star) 0.5px, transparent 1px),
+    radial-gradient(1px 1px at 55% 15%, var(--star) 0.5px, transparent 1px),
+    radial-gradient(1px 1px at 70% 80%, var(--star) 0.5px, transparent 1px),
+    radial-gradient(1px 1px at 85% 40%, var(--star) 0.5px, transparent 1px),
+    radial-gradient(1px 1px at 20% 90%, var(--star) 0.5px, transparent 1px),
+    radial-gradient(1px 1px at 45% 50%, var(--star) 0.4px, transparent 1px),
+    radial-gradient(1px 1px at 92% 10%, var(--star) 0.4px, transparent 1px),
+    radial-gradient(1px 1px at 5% 55%, var(--star) 0.4px, transparent 1px),
+    radial-gradient(1px 1px at 60% 35%, var(--star) 0.3px, transparent 1px),
+    radial-gradient(1px 1px at 38% 82%, var(--star) 0.3px, transparent 1px),
+    radial-gradient(1px 1px at 78% 58%, var(--star) 0.3px, transparent 1px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- layout ---- */
+header, main, footer { position: relative; z-index: 1; }
+
+header {
+  text-align: center;
+  padding: 3rem 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+header p {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+nav a:hover { color: var(--white); }
+
+/* ---- main content ---- */
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  flex: 1;
+}
+
+main h2 {
+  font-size: 1.35rem;
+  color: var(--white);
+  margin: 2.5rem 0 0.8rem;
+  font-weight: 600;
+}
+
+main h2:first-child { margin-top: 0; }
+
+main h3 {
+  font-size: 1.05rem;
+  color: var(--white);
+  margin: 1.8rem 0 0.5rem;
+  font-weight: 600;
+}
+
+main p {
+  margin-bottom: 1rem;
+}
+
+main ul, main ol {
+  margin: 0 0 1rem 1.5rem;
+}
+
+main li {
+  margin-bottom: 0.35rem;
+}
+
+main a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
+/* effective-date callout */
+.effective-date {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* feature cards on the home page */
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.feature {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+}
+
+.feature .label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.feature p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* hero section */
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.hero h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.hero p {
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ---- setup diagram ---- */
+.setup-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0 2rem;
+}
+
+.setup-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.4rem;
+  width: 100%;
+  max-width: 460px;
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.8rem;
+  row-gap: 0.1rem;
+}
+
+.setup-icon {
+  grid-row: 1 / 3;
+  font-size: 1.3rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setup-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.setup-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.setup-connector {
+  color: var(--border);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.3rem 0;
+  opacity: 0.7;
+}
+
+/* ---- pipeline steps ---- */
+ol.pipeline {
+  list-style: none;
+  counter-reset: step;
+  margin: 1rem 0 1.5rem 0;
+  padding: 0;
+}
+
+ol.pipeline li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.8rem 1rem 0.8rem 3.2rem;
+  margin-bottom: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.92rem;
+}
+
+ol.pipeline li::before {
+  content: counter(step);
+  position: absolute;
+  left: 1rem;
+  top: 0.85rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--accent-dim);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- code inline ---- */
+code {
+  font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.88em;
+  color: var(--accent);
+}
+
+/* ---- footer ---- */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  margin: 0 0.6rem;
+}
+
+footer a:hover { color: var(--accent); }
+
+/* ---- responsive ---- */
+@media (max-width: 540px) {
+  header h1 { font-size: 1.5rem; }
+  nav { gap: 1.2rem; }
+  .features { grid-template-columns: 1fr; }
+  main { padding: 2rem 1.25rem 3rem; }
+  .setup-item { max-width: 100%; }
+  ol.pipeline li { padding-left: 2.8rem; }
+  ol.pipeline li::before { left: 0.7rem; }
+}
